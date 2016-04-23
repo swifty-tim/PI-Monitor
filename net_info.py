@@ -13,7 +13,7 @@ from bokeh.models import Range1d, BoxAnnotation
 from bokeh.plotting import figure, output_file, show, save
 from bokeh.palettes import Spectral7
 
-REQUEST_STRING = 'http://timothybarnard.org/Network/get.php?type=1'
+REQUEST_STRING = ''
 TIME_FREQUENCY = '15T'  # T for minutes
 GRAPH_SAVE_DIR_PATH = ''
 
