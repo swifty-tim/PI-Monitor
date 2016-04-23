@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+from __future__ import division
+from subprocess import PIPE, Popen
 import subprocess
 import urllib2
 import json
@@ -10,8 +12,46 @@ import re
 import requests
 import random
 from bs4 import BeautifulSoup
-from urllib2 import urlopen  
+from urllib2 import urlopen
 import datetime  
+import psutil
+
+
+def get_cpu_temperature():
+	process = Popen(['vcgencmd', 'measure_temp'], stdout=PIPE)
+	output, _error = process.communicate()
+	return float(output[output.index('=') + 1:output.rindex("'")])
+
+
+def getPIData():
+	cpu_temperature = get_cpu_temperature()
+	cpu_usage = psutil.cpu_percent()
+	
+	ram = psutil.virtual_memory()
+	ram_total = ram.total / 2**20       # MiB.
+	ram_used = ram.used / 2**20
+	ram_free = ram.free / 2**20
+	ram_percent_used = ram.percent
+	
+	disk = psutil.disk_usage('/')
+	disk_total = disk.total / 2**30     # GiB.
+	disk_used = disk.used / 2**30
+	disk_free = disk.free / 2**30
+	disk_percent_used = disk.percent
+	
+	jsonData = {
+    	'cpu_temperature':cpu_temperature,
+    	'cpu_usage':cpu_usage,
+    	'ram_total':ram_total,
+    	'ram_used':ram_used,
+    	'ram_free':ram_free,
+    	'ram_percent_used':ram_percent_used,
+    	'disk_total':disk_total,
+    	'disk_used':disk_used,
+    	'disk_free':disk_free,
+    	'disk_percent_used':disk_percent_used,
+	}
+	send_data("http://timothybarnard.org/Network/putPIData.php", jsonData)
 
 def contains_digits(s):
 	return any(char.isdigit() for char in s)
@@ -58,12 +98,12 @@ def get_random_user_agent():
 	user_agent_list = []
 	lines = 0
 
-	with open('user_agents.txt', 'r') as file_handle:
+	with open('/home/pi/Network/user_agents.txt', 'r') as file_handle:
 		for line in file_handle:
 			user_agent_list.append(line)
 			lines += 1
 
-	return user_agent_list[random.randint(0, lines)].strip()
+	return user_agent_list[random.randint(0, lines-1)].strip()
 
 def find_loc(ip_add):
 	path = "http://ipinfo.io/"+ip_add
@@ -79,6 +119,8 @@ def find_loc(ip_add):
 	loc = ""
 	carrier = ""
 	org = ""
+	city = ""
+	country = ""
 	if "Rate limit exceeded. Subscribe to a paid plan to increase your usage limits at http://ipinfo.io/pricing, or contact us via http://ipinfo.io/contact" in datas[0]:
 		find_loc(ip_add)
 	else:
@@ -126,7 +168,7 @@ def getRoute(dest_name):
 			for ping in pings:
 				if contains_digits(ping): 
 					rttArr.append(ping.strip())
-		i = datetime.datetime.now()
+		i = datetime.datetime.now()		
 		route = {
 			"route_ip":route_ip,
 			"location":route_loc,
@@ -147,14 +189,15 @@ def send_data(url, jsondata):
 	response = urllib2.urlopen(req, json.dumps(jsondata))
 
 
+#getPIData()
 ping_Add = []
 ping_Add.append("www.google.ie")
-#ping_Add.append("www.facebook.com")
-#ping_Add.append("www.google.com")
-#ping_Add.append("www.twitter.com")
-#ping_Add.append("www.google.co.uk")
-#ping_Add.append("www.timothybarnard.org")
-#ping_Add.append("www.motorspy.org")
+ping_Add.append("www.facebook.com")
+ping_Add.append("www.google.com")
+ping_Add.append("www.twitter.com")
+ping_Add.append("www.google.co.uk")
+ping_Add.append("www.timothybarnard.org")
+ping_Add.append("www.motorspy.org")
 
 for address in ping_Add:
 	ip = socket.gethostbyname(address)
@@ -171,7 +214,6 @@ for address in ping_Add:
 	ping_max = float(timing_stats[2])
 		
 	location, coord, carrier,org = find_loc(ip)
-
 	jsond = {
 		'address': ip,
 		'ping_loc':location,
@@ -187,5 +229,5 @@ for address in ping_Add:
 		'route' : getRoute(address),
 		"test_date":("%s" % i)
 	}
-	print(json.dumps(jsond))	
-	#send_data("http://timothybarnard.org/Network/put.php", jsond)
+	#print(json.dumps(jsond))	
+	send_data("http://timothybarnard.org/Network/put.php", jsond)
