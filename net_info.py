@@ -93,7 +93,7 @@ def get_all_plots(net_info, time_frequency):
 
 
 def save_plots_to_dir(plot_dictionary, dir_path):
-    date_time_str = datetime.now().strftime('_%Y%m%d_%H%m')
+    date_time_str = datetime.now().strftime('_%Y%m%d_%H%M')
 
     if dir_path != '' and not os.path.exists(dir_path):
         os.makedirs(dir_path)
