@@ -13,7 +13,6 @@ from bokeh.models import Range1d, BoxAnnotation
 from bokeh.plotting import figure, output_file, show, save
 from bokeh.palettes import Spectral7
 
-REQUEST_STRING = ''
 TIME_FREQUENCY = '15T'  # T for minutes
 GRAPH_SAVE_DIR_PATH = ''
 
@@ -106,7 +105,10 @@ def save_plots_to_dir(plot_dictionary, dir_path):
 
 
 def main():
-    request_string = REQUEST_STRING
+    with open('../ip.txt', 'r') as file_handle:
+        for line in file_handle:
+             request_string = line
+    print line
     time_frequency = TIME_FREQUENCY
     dir_path = GRAPH_SAVE_DIR_PATH
 
