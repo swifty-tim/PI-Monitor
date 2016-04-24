@@ -13,7 +13,7 @@ from bokeh.models import Range1d, BoxAnnotation
 from bokeh.plotting import figure, output_file, show, save
 from bokeh.palettes import Spectral7
 
-REQUEST_STRING = 'http://timothybarnard.org/Network/get.php?type=1'
+REQUEST_STRING = ''
 TIME_FREQUENCY = '15T'  # T for minutes
 GRAPH_SAVE_DIR_PATH = ''
 
@@ -59,7 +59,7 @@ def get_ping_plot_by_host(data):
 
     plot = figure(title="Ping over time", plot_width=1600, plot_height=800, x_axis_type="datetime")
     plot.y_range = Range1d(0, 150)
-    plot.xaxis.axis_label = "Time(per 10 mins)"
+    plot.xaxis.axis_label = "Time(per 15 mins)"
     plot.yaxis.axis_label = "Ping(ms)"
 
     dic = {x: data.ping_avg[data.hostname == x] for x in data.hostname.unique()}
