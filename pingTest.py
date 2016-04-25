@@ -51,7 +51,7 @@ def getPIData():
     	'disk_free':disk_free,
     	'disk_percent_used':disk_percent_used,
 	}
-	send_data("http://timothybarnard.org/Network/putPIData.php", jsonData)
+	send_data("URL", jsonData)
 
 def contains_digits(s):
 	return any(char.isdigit() for char in s)
@@ -98,7 +98,7 @@ def get_random_user_agent():
 	user_agent_list = []
 	lines = 0
 
-	with open('/home/pi/Network/user_agents.txt', 'r') as file_handle:
+	with open('path to file', 'r') as file_handle:
 		for line in file_handle:
 			user_agent_list.append(line)
 			lines += 1
@@ -230,4 +230,4 @@ for address in ping_Add:
 		"test_date":("%s" % i)
 	}
 	#print(json.dumps(jsond))	
-	send_data("http://timothybarnard.org/Network/put.php", jsond)
+	send_data("URL path", jsond)

@@ -148,8 +148,8 @@ public class HTTPConnection {
     }
     
     
-    class func parseJSONPIData(data : NSData) -> [String] {
-        var piDataValues = [String]()
+    class func parseJSONPIData(data : NSData) -> PIData {
+        let piDataValues = PIData()
         do {
             let json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves)
             
@@ -157,36 +157,37 @@ public class HTTPConnection {
             if let feed = json["network"] as? NSDictionary {
                 //    println("Succes: \(success)")
                 
+                
                 if let cpu_temperature = feed["cpu_temperature"] as? String {
-                    piDataValues.append("CPU Temp: "+cpu_temperature)
+                   piDataValues.setCPUTemp(cpu_temperature)
                 }
                 if let cpu_usage = feed["cpu_usage"] as? String {
-                    piDataValues.append("CPU Usuage: "+cpu_usage)
+                   piDataValues.setCpuUsage(cpu_usage+"%")
                 }
                 if let ram_total = feed["ram_total"] as? String {
-                    piDataValues.append("RAM Total: "+ram_total)
-                }
-                if let ram_used = feed["ram_used"] as? String {
-                    piDataValues.append("RAM Used: "+ram_used)
-                }
-                if let ram_free = feed["ram_free"] as? String {
-                    piDataValues.append("RAM Free: "+ram_free)
+                    piDataValues.setRamTotal(ram_total)
                 }
                 if let ram_percent_used = feed["ram_percent_used"] as? String {
-                    piDataValues.append("RAM Used: "+ram_percent_used+"%")
+                    piDataValues.setRamUsage(ram_percent_used+"%")
+                }
+                /*if let ram_used = feed["ram_used"] as? String {
+                    //piDataValues.append("RAM Used: "+ram_used)
+                }
+                if let ram_free = feed["ram_free"] as? String {
+                    //piDataValues.append("RAM Free: "+ram_free)
                 }
                 if let disk_total = feed["disk_total"] as? String {
-                    piDataValues.append("Disk Total: "+disk_total)
+                    //piDataValues.append("Disk Total: "+disk_total)
                 }
                 if let disk_used = feed["disk_used"] as? String {
-                    piDataValues.append("Disk Used: "+disk_used)
+                    //piDataValues.append("Disk Used: "+disk_used)
                 }
                 if let disk_free = feed["disk_free"] as? String {
-                    piDataValues.append("Disk Free: "+disk_free)
+                    //piDataValues.append("Disk Free: "+disk_free)
                 }
                 if let disk_percent_used = feed["disk_percent_used"] as? String {
-                    piDataValues.append("Disk Used: "+disk_percent_used+"%")
-                }
+                    //piDataValues.append("Disk Used: "+disk_percent_used+"%")
+                } */
             }
             
         } catch let parseError {

@@ -8,6 +8,47 @@
 
 import Foundation
 
+class PIData {
+    
+    var cpu_temperature: String = ""
+    var cpu_usage : String = ""
+    var ram_total : String = ""
+    var ram_free : String = ""
+    var ram_percent_used: String = ""
+    var disk_total : String = ""
+    var disk_used : String = ""
+    var disk_free : String = ""
+    var disk_percent_used: String = ""
+    
+    func setCPUTemp(cpu_temperature: String) {
+        self.cpu_temperature = cpu_temperature
+    }
+    func getCPUTemp() -> String {
+        return self.cpu_temperature
+    }
+    
+    func setCpuUsage(cpu_usage : String) {
+        self.cpu_usage = cpu_usage
+    }
+    func getCpuUsage() -> String {
+        return self.cpu_usage
+    }
+    func setRamTotal(ram_total : String) {
+        self.ram_total = ram_total
+    }
+    func getRamTotal() -> String {
+        return self.ram_total
+    }
+    
+    func setRamUsage(ram_percent_used : String) {
+        self.ram_percent_used = ram_percent_used
+    }
+    func getRamUsage() -> String {
+        return self.ram_percent_used
+    }
+}
+
+
 class Route {
     var ip: String = ""
     var rtt = [String]()
