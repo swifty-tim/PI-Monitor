@@ -1,0 +1,598 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B22F0D3A1CE73EB900B44320 /* Segments.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22F0D391CE73EB900B44320 /* Segments.swift */; };
+		B22F0D3C1CE7B8E600B44320 /* AddTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22F0D3B1CE7B8E600B44320 /* AddTableViewController.swift */; };
+		B241F7001CD5343400E5371D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F6FF1CD5343400E5371D /* AppDelegate.swift */; };
+		B241F7021CD5343400E5371D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F7011CD5343400E5371D /* ViewController.swift */; };
+		B241F7051CD5343400E5371D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B241F7031CD5343400E5371D /* Main.storyboard */; };
+		B241F7071CD5343400E5371D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B241F7061CD5343400E5371D /* Assets.xcassets */; };
+		B241F70A1CD5343400E5371D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B241F7081CD5343400E5371D /* LaunchScreen.storyboard */; };
+		B241F7151CD5343500E5371D /* Pi_HeatingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F7141CD5343500E5371D /* Pi_HeatingTests.swift */; };
+		B241F7201CD5343500E5371D /* Pi_HeatingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F71F1CD5343500E5371D /* Pi_HeatingUITests.swift */; };
+		B241F7321CD57D0D00E5371D /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F7311CD57D0D00E5371D /* DayViewController.swift */; };
+		B241F7361CD7370800E5371D /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F7351CD7370800E5371D /* PageViewController.swift */; };
+		B241F7381CD7376300E5371D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F7371CD7376300E5371D /* PageController.swift */; };
+		B241F73A1CD78E4000E5371D /* FilterContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F7391CD78E4000E5371D /* FilterContentView.swift */; };
+		B241F73C1CDA9CAB00E5371D /* TimerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F73B1CDA9CAB00E5371D /* TimerTableViewCell.swift */; };
+		B241F73E1CDBF55C00E5371D /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F73D1CDBF55C00E5371D /* ScheduleView.swift */; };
+		B241F7401CDF4CD800E5371D /* IPadStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B241F73F1CDF4CD800E5371D /* IPadStoryboard.storyboard */; };
+		B241F7421CDF527D00E5371D /* Heater.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F7411CDF527D00E5371D /* Heater.swift */; };
+		B241F7461CDF6C9B00E5371D /* HTTPConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F7451CDF6C9B00E5371D /* HTTPConnection.swift */; };
+		B241F7481CDFA09400E5371D /* IPadSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F7471CDFA09400E5371D /* IPadSplitViewController.swift */; };
+		B241F74A1CDFA10700E5371D /* DaysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F7491CDFA10700E5371D /* DaysTableViewController.swift */; };
+		B241F74C1CDFA25600E5371D /* DayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B241F74B1CDFA25600E5371D /* DayTableViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B241F7111CD5343500E5371D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B241F6F41CD5343400E5371D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B241F6FB1CD5343400E5371D;
+			remoteInfo = "Pi-Heating";
+		};
+		B241F71C1CD5343500E5371D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B241F6F41CD5343400E5371D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B241F6FB1CD5343400E5371D;
+			remoteInfo = "Pi-Heating";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B22F0D391CE73EB900B44320 /* Segments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segments.swift; sourceTree = "<group>"; };
+		B22F0D3B1CE7B8E600B44320 /* AddTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTableViewController.swift; sourceTree = "<group>"; };
+		B241F6FC1CD5343400E5371D /* Pi-Heating.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pi-Heating.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B241F6FF1CD5343400E5371D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B241F7011CD5343400E5371D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B241F7041CD5343400E5371D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B241F7061CD5343400E5371D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B241F7091CD5343400E5371D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B241F70B1CD5343400E5371D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B241F7101CD5343500E5371D /* Pi-HeatingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pi-HeatingTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B241F7141CD5343500E5371D /* Pi_HeatingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pi_HeatingTests.swift; sourceTree = "<group>"; };
+		B241F7161CD5343500E5371D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B241F71B1CD5343500E5371D /* Pi-HeatingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pi-HeatingUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B241F71F1CD5343500E5371D /* Pi_HeatingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pi_HeatingUITests.swift; sourceTree = "<group>"; };
+		B241F7211CD5343500E5371D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B241F7311CD57D0D00E5371D /* DayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
+		B241F7351CD7370800E5371D /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		B241F7371CD7376300E5371D /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
+		B241F7391CD78E4000E5371D /* FilterContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterContentView.swift; sourceTree = "<group>"; };
+		B241F73B1CDA9CAB00E5371D /* TimerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerTableViewCell.swift; sourceTree = "<group>"; };
+		B241F73D1CDBF55C00E5371D /* ScheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		B241F73F1CDF4CD800E5371D /* IPadStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IPadStoryboard.storyboard; sourceTree = "<group>"; };
+		B241F7411CDF527D00E5371D /* Heater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heater.swift; sourceTree = "<group>"; };
+		B241F7451CDF6C9B00E5371D /* HTTPConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPConnection.swift; sourceTree = "<group>"; };
+		B241F7471CDFA09400E5371D /* IPadSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPadSplitViewController.swift; sourceTree = "<group>"; };
+		B241F7491CDFA10700E5371D /* DaysTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaysTableViewController.swift; sourceTree = "<group>"; };
+		B241F74B1CDFA25600E5371D /* DayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayTableViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B241F6F91CD5343400E5371D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B241F70D1CD5343500E5371D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B241F7181CD5343500E5371D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B241F6F31CD5343400E5371D = {
+			isa = PBXGroup;
+			children = (
+				B241F6FE1CD5343400E5371D /* Pi-Heating */,
+				B241F7131CD5343500E5371D /* Pi-HeatingTests */,
+				B241F71E1CD5343500E5371D /* Pi-HeatingUITests */,
+				B241F6FD1CD5343400E5371D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B241F6FD1CD5343400E5371D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B241F6FC1CD5343400E5371D /* Pi-Heating.app */,
+				B241F7101CD5343500E5371D /* Pi-HeatingTests.xctest */,
+				B241F71B1CD5343500E5371D /* Pi-HeatingUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B241F6FE1CD5343400E5371D /* Pi-Heating */ = {
+			isa = PBXGroup;
+			children = (
+				B27730E61CDFB15D00FC1466 /* View */,
+				B27730E41CDFB11800FC1466 /* Model */,
+				B27730E31CDFB11000FC1466 /* iPhone */,
+				B27730E21CDFB10500FC1466 /* iPad */,
+				B241F6FF1CD5343400E5371D /* AppDelegate.swift */,
+				B241F7031CD5343400E5371D /* Main.storyboard */,
+				B241F7061CD5343400E5371D /* Assets.xcassets */,
+				B241F7081CD5343400E5371D /* LaunchScreen.storyboard */,
+				B241F70B1CD5343400E5371D /* Info.plist */,
+				B241F73F1CDF4CD800E5371D /* IPadStoryboard.storyboard */,
+			);
+			path = "Pi-Heating";
+			sourceTree = "<group>";
+		};
+		B241F7131CD5343500E5371D /* Pi-HeatingTests */ = {
+			isa = PBXGroup;
+			children = (
+				B241F7141CD5343500E5371D /* Pi_HeatingTests.swift */,
+				B241F7161CD5343500E5371D /* Info.plist */,
+			);
+			path = "Pi-HeatingTests";
+			sourceTree = "<group>";
+		};
+		B241F71E1CD5343500E5371D /* Pi-HeatingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B241F71F1CD5343500E5371D /* Pi_HeatingUITests.swift */,
+				B241F7211CD5343500E5371D /* Info.plist */,
+			);
+			path = "Pi-HeatingUITests";
+			sourceTree = "<group>";
+		};
+		B27730E21CDFB10500FC1466 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				B241F7491CDFA10700E5371D /* DaysTableViewController.swift */,
+				B241F7471CDFA09400E5371D /* IPadSplitViewController.swift */,
+				B241F74B1CDFA25600E5371D /* DayTableViewController.swift */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+		B27730E31CDFB11000FC1466 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				B241F7311CD57D0D00E5371D /* DayViewController.swift */,
+				B241F7351CD7370800E5371D /* PageViewController.swift */,
+				B241F7371CD7376300E5371D /* PageController.swift */,
+				B22F0D3B1CE7B8E600B44320 /* AddTableViewController.swift */,
+			);
+			name = iPhone;
+			sourceTree = "<group>";
+		};
+		B27730E41CDFB11800FC1466 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B22F0D391CE73EB900B44320 /* Segments.swift */,
+				B241F7451CDF6C9B00E5371D /* HTTPConnection.swift */,
+				B241F7411CDF527D00E5371D /* Heater.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		B27730E61CDFB15D00FC1466 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B241F7011CD5343400E5371D /* ViewController.swift */,
+				B241F73B1CDA9CAB00E5371D /* TimerTableViewCell.swift */,
+				B241F73D1CDBF55C00E5371D /* ScheduleView.swift */,
+				B241F7391CD78E4000E5371D /* FilterContentView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B241F6FB1CD5343400E5371D /* Pi-Heating */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B241F7241CD5343500E5371D /* Build configuration list for PBXNativeTarget "Pi-Heating" */;
+			buildPhases = (
+				B241F6F81CD5343400E5371D /* Sources */,
+				B241F6F91CD5343400E5371D /* Frameworks */,
+				B241F6FA1CD5343400E5371D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pi-Heating";
+			productName = "Pi-Heating";
+			productReference = B241F6FC1CD5343400E5371D /* Pi-Heating.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B241F70F1CD5343500E5371D /* Pi-HeatingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B241F7271CD5343500E5371D /* Build configuration list for PBXNativeTarget "Pi-HeatingTests" */;
+			buildPhases = (
+				B241F70C1CD5343500E5371D /* Sources */,
+				B241F70D1CD5343500E5371D /* Frameworks */,
+				B241F70E1CD5343500E5371D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B241F7121CD5343500E5371D /* PBXTargetDependency */,
+			);
+			name = "Pi-HeatingTests";
+			productName = "Pi-HeatingTests";
+			productReference = B241F7101CD5343500E5371D /* Pi-HeatingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B241F71A1CD5343500E5371D /* Pi-HeatingUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B241F72A1CD5343500E5371D /* Build configuration list for PBXNativeTarget "Pi-HeatingUITests" */;
+			buildPhases = (
+				B241F7171CD5343500E5371D /* Sources */,
+				B241F7181CD5343500E5371D /* Frameworks */,
+				B241F7191CD5343500E5371D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B241F71D1CD5343500E5371D /* PBXTargetDependency */,
+			);
+			name = "Pi-HeatingUITests";
+			productName = "Pi-HeatingUITests";
+			productReference = B241F71B1CD5343500E5371D /* Pi-HeatingUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B241F6F41CD5343400E5371D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Timothy Barnard";
+				TargetAttributes = {
+					B241F6FB1CD5343400E5371D = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					B241F70F1CD5343500E5371D = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = B241F6FB1CD5343400E5371D;
+					};
+					B241F71A1CD5343500E5371D = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = B241F6FB1CD5343400E5371D;
+					};
+				};
+			};
+			buildConfigurationList = B241F6F71CD5343400E5371D /* Build configuration list for PBXProject "Pi-Heating" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B241F6F31CD5343400E5371D;
+			productRefGroup = B241F6FD1CD5343400E5371D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B241F6FB1CD5343400E5371D /* Pi-Heating */,
+				B241F70F1CD5343500E5371D /* Pi-HeatingTests */,
+				B241F71A1CD5343500E5371D /* Pi-HeatingUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B241F6FA1CD5343400E5371D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B241F70A1CD5343400E5371D /* LaunchScreen.storyboard in Resources */,
+				B241F7071CD5343400E5371D /* Assets.xcassets in Resources */,
+				B241F7051CD5343400E5371D /* Main.storyboard in Resources */,
+				B241F7401CDF4CD800E5371D /* IPadStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B241F70E1CD5343500E5371D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B241F7191CD5343500E5371D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B241F6F81CD5343400E5371D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B241F7021CD5343400E5371D /* ViewController.swift in Sources */,
+				B22F0D3A1CE73EB900B44320 /* Segments.swift in Sources */,
+				B241F7001CD5343400E5371D /* AppDelegate.swift in Sources */,
+				B241F73A1CD78E4000E5371D /* FilterContentView.swift in Sources */,
+				B241F7321CD57D0D00E5371D /* DayViewController.swift in Sources */,
+				B241F73C1CDA9CAB00E5371D /* TimerTableViewCell.swift in Sources */,
+				B241F73E1CDBF55C00E5371D /* ScheduleView.swift in Sources */,
+				B241F7421CDF527D00E5371D /* Heater.swift in Sources */,
+				B241F7481CDFA09400E5371D /* IPadSplitViewController.swift in Sources */,
+				B241F74A1CDFA10700E5371D /* DaysTableViewController.swift in Sources */,
+				B241F7361CD7370800E5371D /* PageViewController.swift in Sources */,
+				B241F7381CD7376300E5371D /* PageController.swift in Sources */,
+				B241F7461CDF6C9B00E5371D /* HTTPConnection.swift in Sources */,
+				B241F74C1CDFA25600E5371D /* DayTableViewController.swift in Sources */,
+				B22F0D3C1CE7B8E600B44320 /* AddTableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B241F70C1CD5343500E5371D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B241F7151CD5343500E5371D /* Pi_HeatingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B241F7171CD5343500E5371D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B241F7201CD5343500E5371D /* Pi_HeatingUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B241F7121CD5343500E5371D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B241F6FB1CD5343400E5371D /* Pi-Heating */;
+			targetProxy = B241F7111CD5343500E5371D /* PBXContainerItemProxy */;
+		};
+		B241F71D1CD5343500E5371D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B241F6FB1CD5343400E5371D /* Pi-Heating */;
+			targetProxy = B241F71C1CD5343500E5371D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B241F7031CD5343400E5371D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B241F7041CD5343400E5371D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B241F7081CD5343400E5371D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B241F7091CD5343400E5371D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B241F7221CD5343500E5371D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B241F7231CD5343500E5371D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B241F7251CD5343500E5371D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Pi-Heating/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "barnard.com.Pi-Heating";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B241F7261CD5343500E5371D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Pi-Heating/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "barnard.com.Pi-Heating";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B241F7281CD5343500E5371D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Pi-HeatingTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "barnard.com.Pi-HeatingTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pi-Heating.app/Pi-Heating";
+			};
+			name = Debug;
+		};
+		B241F7291CD5343500E5371D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Pi-HeatingTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "barnard.com.Pi-HeatingTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pi-Heating.app/Pi-Heating";
+			};
+			name = Release;
+		};
+		B241F72B1CD5343500E5371D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Pi-HeatingUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "barnard.com.Pi-HeatingUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Pi-Heating";
+			};
+			name = Debug;
+		};
+		B241F72C1CD5343500E5371D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Pi-HeatingUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "barnard.com.Pi-HeatingUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Pi-Heating";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B241F6F71CD5343400E5371D /* Build configuration list for PBXProject "Pi-Heating" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B241F7221CD5343500E5371D /* Debug */,
+				B241F7231CD5343500E5371D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B241F7241CD5343500E5371D /* Build configuration list for PBXNativeTarget "Pi-Heating" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B241F7251CD5343500E5371D /* Debug */,
+				B241F7261CD5343500E5371D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B241F7271CD5343500E5371D /* Build configuration list for PBXNativeTarget "Pi-HeatingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B241F7281CD5343500E5371D /* Debug */,
+				B241F7291CD5343500E5371D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B241F72A1CD5343500E5371D /* Build configuration list for PBXNativeTarget "Pi-HeatingUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B241F72B1CD5343500E5371D /* Debug */,
+				B241F72C1CD5343500E5371D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B241F6F41CD5343400E5371D /* Project object */;
+}
