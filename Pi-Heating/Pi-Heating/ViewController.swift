@@ -30,6 +30,8 @@ class ViewController: UIViewController {
     var boostTenMins : Int?
     var boostIndex : Int?
     
+    var controlValues = [String:Int]()
+    
     //255, 0, 128
     let currTimeColor = UIColor(red: 255.0/255, green: 0.0/255, blue: 128.0/255, alpha: 0.8)
     //146, 205, 0
@@ -45,6 +47,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.boostIndex = 0
         self.boostTenMins = 0
+        self.getControlValues()
         self.getHeaterValues()
         timerUsed = true
         
@@ -103,6 +106,37 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getControlValues() {
+        
+        let dic = [String: String]()
+        let networkURL = NSBundle.mainBundle().objectForInfoDictionaryKey("Home URL") as! String
+        HTTPConnection.getPingResults(dic, url: networkURL+"control/get", httpMethod: "POST") { (succeeded: Bool, data: NSData) -> () in
+            // Move to the UI thread
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                if (!succeeded) {
+                    let alert = UIAlertController(title: "Oops!", message:"No data found", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "OK", style: .Default) { _ in
+                        //
+                    }
+                    alert.addAction(action)
+                    self.presentViewController(alert, animated: true){}
+                    
+                } else {
+                    self.controlValues = HTTPConnection.parseJSONControl(data)
+                    print(self.controlValues["waterOn"])
+                    print(self.controlValues["heatingOn"])
+                    print(self.controlValues["pumpOn"])
+                    if self.controlValues["waterOn"] == 0 {
+                        self.timerUsed = false
+                    } else {
+                        self.timerUsed = true
+                    }
+                }
+            })
+        }
+        
     }
     
     func getHeaterValues() {
@@ -283,7 +317,7 @@ class ViewController: UIViewController {
             self.segments[indexNow].getShape().strokeColor = UIColor.yellowColor().CGColor
         } */
         
-        if self.heaterSchedules.count > 0 {
+        if self.heaterSchedules.count > 0 && self.timerUsed! {
         
             for schedule in self.todaySchedules {
                 
@@ -431,7 +465,12 @@ extension ViewController {
         self.filterView = FilterContentView()
         self.filterView!.frame = CGRect(x: 5, y: self.view.frame.height, width: self.view.frame.width - 10 , height: self.view.frame.height * 0.6)
         self.navigationController!.view.addSubview(self.filterView!)
-        self.filterView?.setHotWaterSwitch(self.timerUsed!)
+        let waterOn = self.IntToBool(self.controlValues["waterOn"]!)
+        let heatingOn = self.IntToBool(self.controlValues["heatingOn"]!)
+        let pumpOn = self.IntToBool(self.controlValues["pumpOn"]! )
+        self.filterView?.setHotWaterSwitch(waterOn)
+        self.filterView?.setHeatingSwitch(heatingOn)
+        self.filterView?.setPumpSwitchState(pumpOn)
         
         UIView.animateWithDuration(0.8, animations: { () -> Void in
             
@@ -458,7 +497,70 @@ extension ViewController {
             
         }) { (complete) -> Void in
             self.timerUsed = self.filterView!.returnHotWaterSwitch()
+            
+            var change : Bool = false
+            if self.controlValues["waterOn"] != self.boolToInt(self.filterView!.returnHotWaterSwitch()) {
+                self.controlValues["waterOn"] = self.boolToInt(self.filterView!.returnHotWaterSwitch())
+                change = true
+            }
+            if self.controlValues["heatingOn"] != self.boolToInt(self.filterView!.returnHeatingSwitch()) {
+                self.controlValues["heatingOn"] = self.boolToInt(self.filterView!.returnHeatingSwitch())
+                change = true
+            }
+            if self.controlValues["pumpOn"] != self.boolToInt(self.filterView!.returnPumpSwitch()) {
+                self.controlValues["pumpOn"] = self.boolToInt(self.filterView!.returnPumpSwitch())
+                change = true
+            }
+            
+            if change {
+                self.updateControlServer()
+            }
+            
             self.filterView!.removeFromSuperview()
+        }
+    }
+    
+    func updateControlServer() {
+        
+        let dic : [String : String] = [ "id": String(self.controlValues["id"]!),
+                                        "waterOn": String(self.controlValues["waterOn"]!),
+                                        "heatingOn": String(self.controlValues["heatingOn"]!),
+                                        "pumpOn": String(self.controlValues["pumpOn"]!)
+                                        ]
+        
+        let networkURL = NSBundle.mainBundle().objectForInfoDictionaryKey("Home URL") as! String
+        HTTPConnection.getPingResults(dic, url: networkURL+"control/send", httpMethod: "POST") { (succeeded: Bool, data: NSData) -> () in
+            // Move to the UI thread
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                if (!succeeded) {
+                    let alert = UIAlertController(title: "Oops!", message:"No data found", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "OK", style: .Default) { _ in
+                        //
+                    }
+                    alert.addAction(action)
+                    self.presentViewController(alert, animated: true){}
+                    
+                } else {
+                    print("succeded")
+                }
+            })
+        }
+
+    }
+    
+    func IntToBool(value : Int) -> Bool {
+        if value == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func boolToInt( value : Bool ) -> Int {
+        if value {
+            return 1
+        } else {
+            return 0
         }
     }
     

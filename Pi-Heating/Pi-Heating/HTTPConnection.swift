@@ -53,6 +53,41 @@ public class HTTPConnection {
         task.resume()
     }
     
+    class func parseJSONControl(data : NSData) -> [String:Int] {
+        var controlVaules = [String: Int]()
+        
+        do {
+            let strData = NSString(data: data, encoding: NSUTF8StringEncoding)
+            let data1: NSData = strData!.dataUsingEncoding(NSUTF8StringEncoding)!
+            let json = try NSJSONSerialization.JSONObjectWithData(data1, options: .MutableLeaves)
+            
+            // Okay, the parsedJSON is here, let's get the value for 'success' out of it
+            if let feeds = json["control"] as? NSArray {
+                //    println("Succes: \(success)")
+                
+                for feed in feeds {
+                    
+                    
+                    if let id = feed["id"] as? Int {
+                        controlVaules["id"] = id
+                    }
+                    if let heatingOn = feed["heatingOn"] as? Int {
+                        controlVaules["heatingOn"] = heatingOn
+                    }
+                    if let pumpON = feed["pumpOn"] as? Int {
+                        controlVaules["pumpOn"] = pumpON
+                    }
+                    if let waterOn = feed["waterOn"] as? Int {
+                       controlVaules["waterOn"] = waterOn
+                    }
+                }
+            }
+        } catch let parseError {
+            print(parseError)
+        }
+        
+        return controlVaules
+    }
     
     class func parseJSON(data : NSData) -> [AllTimers] {
         var heaterValues = [AllTimers]()
