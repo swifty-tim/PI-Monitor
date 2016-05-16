@@ -110,6 +110,7 @@ def create_app():
 def onHeaterSend():
     content = request.get_json(silent=True)
     jsonData = json.dumps(content)
+    #request sending to internal network connected pi
     r = requests.post('http://192.168.1.10:5001/send', json=jsonData)
     print json.dumps(content)
     return jsonify({'succeed' : 'ok'}), r.status_code 
