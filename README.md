@@ -32,7 +32,7 @@ Networking Pi Setup 1
 ![alt tag](https://github.com/collegboi/PI-Monitor/blob/master/pi1.jpg)
 
 OSX Monitor App
-![alt tag](https://github.com/collegboi/PI-Monitor/blob/master/pi2.png)
+![alt tag](https://github.com/collegboi/PI-Monitor/blob/master/pi2.jpg)
 
 iOS Network Ping Hop Location
 ![alt tag](https://github.com/collegboi/PI-Monitor/blob/master/pi3.png)
