@@ -12,11 +12,11 @@ def json_serial(obj):
         return serial
     raise TypeError ("Type not serializable")
 
-HOST = "localhost"
-PORT = 3306
-USER = "root"
-PASSWORD = "root1988"
-DB = "heater"
+HOST = ""
+PORT = 
+USER = ""
+PASSWORD = ""
+DB = ""
 
 db = MySQLdb.connect(host=HOST,    # your host, usually localhost
                      user=USER,         # your username
