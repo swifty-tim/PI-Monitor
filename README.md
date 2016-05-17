@@ -28,4 +28,9 @@ central heating or hot water.
 5.Mac OS Monitor. 
 A simple OSX app, to show me the status of the two raspberry's running. I read the current temperater, CPU usuage etc.
 
+Networking Pi Setup 1
+![alt tag](https://github.com/collegboi/PI-Monitor/blob/master/pi1.jpg)
+
+OSX Monitor App
+![alt tag](https://github.com/collegboi/PI-Monitor/blob/master/pi2.jpg)
 
