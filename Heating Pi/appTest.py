@@ -72,7 +72,7 @@ def send_data(url, jsondata):
 
 def get_heater():
     data = ""
-    with open('/home/pi/Network/data.json', 'r') as f:
+    with open('/home/', 'r') as f:
         data = json.load(f)
     return data 
 
@@ -111,7 +111,7 @@ def onHeaterSend():
     content = request.get_json(silent=True)
     jsonData = json.dumps(content)
     #request sending to internal network connected pi
-    r = requests.post('http://192.168.1.10:5001/send', json=jsonData)
+    r = requests.post('http:', json=jsonData)
     print json.dumps(content)
     return jsonify({'succeed' : 'ok'}), r.status_code 
 
@@ -122,7 +122,7 @@ def onPin():
 
 @app.route("/heater/get",  methods=['GET', 'POST'])
 def getHeaterJSON():
-    uri = "http://192.168.1.10:5001/get"
+    uri = "http:"
     print uri
     try:
         response = requests.get(uri)

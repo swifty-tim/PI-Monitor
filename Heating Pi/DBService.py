@@ -16,6 +16,12 @@ class Service(object):
 	def __init__(self):
 		self.dbao = DBAO()
 		
+	def updateControl(self, water, heating, pump):
+		return self.dbao.updateControl(water, heating, pump)
+		
+	def getControl(self):
+		return self.dbao.selectControl()
+		
 	def updateHeater(self, heater ):
 		if heater.getRecordEnabled() == -1:
 			return self.dbao.deleteDB(heater)
@@ -36,5 +42,6 @@ class Service(object):
 			 'boost_used':item.getBoostUsed(), 'record_enabled':item.getRecordEnabled() })
 						
 		return response
+			
 			
 			

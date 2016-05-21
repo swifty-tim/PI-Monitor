@@ -7,16 +7,42 @@ from Heater import Heater
 class DBAO(object):
 
 	conn = None
-
-	def __init__(self):
-		self.conn = mdb.connect()
-
+	
+	def connect(self):
+		self.conn = mdb.connect('', '', '', '')
+	
+	def selectControl(self):
+		objectList = []
+		print("DB Control Selecting...")
+		cur = self.conn.cursor()
+		cur.execute("SELECT *  from table ")
+		rows = cur.fetchall()
+		desc = cur.description
+		# id, day_no, record_enabled, boost_used, heating_used, water_used, heater_type, time_start, time_end):
+		for row in rows:
+		    print row[1]
+		    objectList.append({'id': row[0], 'pumpOn' : row[1], 'heatingOn' : row[2], 'waterOn':row[3]})
+		return objectList
+		
+	def updateControl(self, water, heating, pump):
+		print("DB Control Updating...")
+		try:
+			cur = self.conn.cursor()
+			cur.execute(
+				"UPDATE table SET pumpOn =%s, heatingOn =%s, waterOn =%s WHERE id = 1",
+				(pump, heating water))
+			self.conn.commit()
+			return "Succesfully Updating"
+		except mdb.Error, msg:
+			self.conn.rollback()
+			return "Error in Updating"
+        
 	def insertDB(self, heater):
 		print("DB Inserting..")
 		try:
 			cur = self.conn.cursor()
 			cur.execute(
-				"INSERT INTO PI_HEATER (day_no , heater_type , water_used , heating_used, time_start, time_end, boost_used, record_enabled) VALUES ( %s , %s , %s , %s , %s , %s , %s , %s )",
+				"INSERT INTO table (day_no , heater_type , water_used , heating_used, time_start, time_end, boost_used, record_enabled) VALUES ( %s , %s , %s , %s , %s , %s , %s , %s )",
 				(heater.getDay(),
 			 	heater.getHeaterType(),
 			 	heater.getWaterUsed(),
@@ -27,6 +53,7 @@ class DBAO(object):
 			 	heater.getRecordEnabled()))
 			self.conn.commit()
 			return "Succesfully Added"
+			
 		except mdb.Error as msg:
 			self.conn.rollback()
 			return "Error in Adding"
@@ -36,7 +63,7 @@ class DBAO(object):
 		try:
 			cur = self.conn.cursor()
 			cur.execute(
-				"UPDATE PI_HEATER SET day_no =%s, heater_type =%s, water_used =%s, heating_used =%s, time_start =%s, time_end =%s, boost_used =%s, record_enabled =%s WHERE id = %s",
+				"UPDATE table SET day_no =%s, heater_type =%s, water_used =%s, heating_used =%s, time_start =%s, time_end =%s, boost_used =%s, record_enabled =%s WHERE id = %s",
 				(heater.getDay(),
 			 	heater.getHeaterType(),
 			 	heater.getWaterUsed(),
@@ -57,7 +84,7 @@ class DBAO(object):
 		try:
 			cur = self.conn.cursor()
 			cur.execute(
-				"DELETE FROM PI_HEATER WHERE id =%s",
+				"DELETE FROM table WHERE id =%s",
 				(heater.getID()))
 			self.conn.commit()
 			return "Succesfully Deleted"
@@ -67,9 +94,16 @@ class DBAO(object):
 
 	def selectDB(self):
 		objectList = []
-		print("DB Selecting...")
-		cur = self.conn.cursor()
-		cur.execute("SELECT *  from PI_HEATER ")
+		try:
+			print("DB Selecting...")
+			cur = self.conn.cursor()
+			cur.execute("SELECT *  from table ")
+		except (AttributeError, MySQLdb.OperationalError):
+			print("DB Error Selecting...")
+			self.connect()
+			cur = self.conn.cursor()
+			cur.execute("SELECT *  from table ")
+			
 		rows = cur.fetchall()
 		desc = cur.description
 		# id, day_no, record_enabled, boost_used, heating_used, water_used, heater_type, time_start, time_end):
@@ -89,3 +123,6 @@ class DBAO(object):
 
 	def closeDB(self):
 		self.conn.close()
+	
+	def __init__(self):
+		self.connect()

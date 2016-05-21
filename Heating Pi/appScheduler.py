@@ -11,6 +11,9 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler import events
 from datetime import datetime
 import time
+from instapush import Instapush, App
+
+appPush = App(appid='', secret='')
 
 service = Service()
 dbArr = service.getAllHeater()
@@ -36,17 +39,26 @@ def my_listener(event):
     else:
         print('The job worked :)')
 
+def stop_hello(scheduler):
+    print "job stopped"
+    appPush.notify(event_name='Test', trackers={ 'event': 'off'})
+    #scheduler.add_job(hello, 'interval', seconds=2, id='hello_job')
+
 def start_hello(scheduler):
     print "job completed"
+    appPush.notify(event_name='Test', trackers={ 'event': 'on'})
     #scheduler.add_job(hello, 'interval', seconds=2, id='hello_job')
 
 @app.route("/update", methods=['GET'])
 def onUpdate():
     for db in dbArr:
         print db['time_start']
-        scheduler.add_job(start_hello, 'cron', hour=23, minute=10, id=str(db['id']), args=[scheduler])
-    scheduler.start()
-    scheduler.add_listener(my_listener, events.EVENT_JOB_ERROR | events.EVENT_JOB_ERROR)
+        timeStart = db['time_start'].strip().split(':')
+        timeEnd = db['time_end'].strip().split(':')
+        scheduler.add_job(start_hello, 'cron', hour=int(timeStart[0]), minute=int(timeStart[1]), args=[scheduler])
+        scheduler.add_job(stop_hello, 'cron', hour=int(timeEnd[0]), minute=int(timeEnd[1]), args=[scheduler])
+    #scheduler.start()
+    #scheduler.add_listener(my_listener, events.EVENT_JOB_ERROR | events.EVENT_JOB_ERROR)
     return "OK"      
 
 @app.route("/delete", methods=['POST', 'GET'])

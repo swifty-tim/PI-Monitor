@@ -66,6 +66,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             
             if indexPath != nil {
                 subVC.timerSchedule = self.todaySchedules[self.indexPath!.row]
+                subVC.editIndexPath = self.indexPath!
             }
         }
     }
@@ -77,7 +78,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         {
             let view2:AddTableViewController = segue.sourceViewController as! AddTableViewController
             
-            if self.update! {
+            if self.indexPath != nil {
                 self.todaySchedules[self.indexPath!.row] = view2.timerSchedule!
                 self.indexPath = nil
             } else {

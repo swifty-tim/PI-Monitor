@@ -17,6 +17,7 @@ class AddTableViewController: UITableViewController, UIPickerViewDelegate, UIPic
     var indexPath : NSIndexPath?
     var scheduleDayNo : Int?
     var update : Bool?
+    var editIndexPath : NSIndexPath?
     var navTitle : String = "Add"
     
     @IBOutlet weak var heaterType: UIPickerView!
@@ -102,6 +103,7 @@ class AddTableViewController: UITableViewController, UIPickerViewDelegate, UIPic
             
             let subVC: DayViewController = segue.destinationViewController as! DayViewController
             subVC.update = self.update!
+            subVC.indexPath = self.editIndexPath!
         }
         
     }

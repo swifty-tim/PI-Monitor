@@ -89,6 +89,10 @@ public class HTTPConnection {
         return controlVaules
     }
     
+    class func lessThan(a: NSDate, b: NSDate) -> Bool {
+    return a.compare(b) == NSComparisonResult.OrderedAscending
+    }
+    
     class func parseJSON(data : NSData) -> [AllTimers] {
         var heaterValues = [AllTimers]()
         do {
@@ -140,19 +144,19 @@ public class HTTPConnection {
                     }
                     
                     switch newheater.getDayNo() {
-                    case 0  :
-                        monValues.append(newheater)
                     case 1  :
-                        tuesValues.append(newheater)
+                        monValues.append(newheater)
                     case 2  :
-                        wedValues.append(newheater)
+                        tuesValues.append(newheater)
                     case 3  :
-                        thursValues.append(newheater)
+                        wedValues.append(newheater)
                     case 4  :
-                        friValues.append(newheater)
+                        thursValues.append(newheater)
                     case 5  :
-                        satValues.append(newheater)
+                        friValues.append(newheater)
                     case 6  :
+                        satValues.append(newheater)
+                    case 7  :
                         sunValues.append(newheater)
                     default :
                         monValues.append(newheater)
@@ -162,31 +166,38 @@ public class HTTPConnection {
             }
             
             let monScheduler = AllTimers()
+            monValues.sortInPlace({ $0.getTimerStart().compare($1.getTimerStart()) == NSComparisonResult.OrderedAscending })
             monScheduler.setDayTimer(monValues)
             heaterValues.append(monScheduler)
             
             let tuesScheduler = AllTimers()
+            tuesValues.sortInPlace({ $0.getTimerStart().compare($1.getTimerStart()) == NSComparisonResult.OrderedAscending })
             tuesScheduler.setDayTimer(tuesValues)
             heaterValues.append(tuesScheduler)
             
             let wedScheduler = AllTimers()
+            wedValues.sortInPlace({ $0.getTimerStart().compare($1.getTimerStart()) == NSComparisonResult.OrderedAscending })
             wedScheduler.setDayTimer(wedValues)
             heaterValues.append(wedScheduler)
             
             let thursScheduler = AllTimers()
+            thursValues.sortInPlace({ $0.getTimerStart().compare($1.getTimerStart()) == NSComparisonResult.OrderedAscending })
             thursScheduler.setDayTimer(thursValues)
             heaterValues.append(thursScheduler)
             
             let friScheduler = AllTimers()
+            friValues.sortInPlace({ $0.getTimerStart().compare($1.getTimerStart()) == NSComparisonResult.OrderedAscending })
             friScheduler.setDayTimer(friValues)
             heaterValues.append(friScheduler)
             
             
             let satScheduler = AllTimers()
+            satValues.sortInPlace({ $0.getTimerStart().compare($1.getTimerStart()) == NSComparisonResult.OrderedAscending })
             satScheduler.setDayTimer(satValues)
             heaterValues.append(satScheduler)
             
             let sunScheduler = AllTimers()
+            sunValues.sortInPlace({ $0.getTimerStart().compare($1.getTimerStart()) == NSComparisonResult.OrderedAscending })
             sunScheduler.setDayTimer(sunValues)
             heaterValues.append(sunScheduler)
             
