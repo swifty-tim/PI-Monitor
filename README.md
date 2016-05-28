@@ -38,7 +38,7 @@ OSX Monitor App
 ![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/pi2.jpg)
 
 iOS Network Ping Hop Location
-![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/pi3.jpg)
+![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/pi3.png)
 
 Pi Heating Setup
 ![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/IMG_2198.JPG)
