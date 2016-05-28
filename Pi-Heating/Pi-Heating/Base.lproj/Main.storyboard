@@ -45,10 +45,11 @@
                         <viewControllerLayoutGuide type="bottom" id="SiI-zA-qd6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DON-vE-yar">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="gGK-N9-gjp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ohr-NS-xLl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -58,7 +59,9 @@
         <!--Page Controller-->
         <scene sceneID="Slo-dV-9Bh">
             <objects>
-                <pageViewController storyboardIdentifier="PageController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="FIq-hK-N3v" customClass="PageController" customModule="Pi_Heating" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="PageController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="FIq-hK-N3v" customClass="PageController" customModule="Pi_Heating" customModuleProvider="target" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VYY-LF-Rux" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2849" y="12"/>
@@ -72,11 +75,11 @@
                         <viewControllerLayoutGuide type="bottom" id="hxT-dq-2az"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Md9-7e-EjY">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0XT-Vc-N1c">
-                                <rect key="frame" x="0.0" y="72" width="600" height="528"/>
+                                <rect key="frame" x="0.0" y="8" width="600" height="528"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="82" id="1IZ-tj-Q3C" customClass="TimerTableViewCell" customModule="Pi_Heating" customModuleProvider="target">
@@ -139,6 +142,7 @@
                             <constraint firstItem="0XT-Vc-N1c" firstAttribute="top" secondItem="Lgq-0G-8Cl" secondAttribute="bottom" constant="8" id="uAp-ts-WSg"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="6Cz-2j-9JN"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
@@ -334,6 +338,7 @@
         <scene sceneID="6sc-Qe-OoI">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ke5-HC-hXd" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iw4-E7-3AL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

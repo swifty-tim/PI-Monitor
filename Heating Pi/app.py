@@ -19,6 +19,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler import events
 from instapush import Instapush, App
 import logging
+import dht11
+import bluetooth
 
 appPush = App(appid='', secret='')
 
@@ -27,6 +29,15 @@ service = Service()
 scheduler = BackgroundScheduler()
 
 logging.basicConfig()
+
+PIN1 = 18
+PIN2 = 23
+PIN3 = 24
+PIN4 = 25
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.cleanup()
 
 class MyResponse(Response):
     @classmethod
@@ -43,11 +54,48 @@ app = MyFlask(__name__)
 app.debug = True        
 
 
+def checkIfHome():
+    result = bluetooth.lookup_name('', timeout=5)
+    if (result != None):
+        print "Tim: in"
+        appPush.notify(event_name='Test', trackers={ 'event': 'Welcome Home'})
+    else:
+        print "Time: out"
+        appPush.notify(event_name='Test', trackers={ 'event': 'Door Opened'})
+
+
+
+def readTemp():
+    result = instance.read()
+    print 'reading'
+    if result.is_valid():
+        print("Last valid input: " + str(datetime.datetime.now()))
+        print("Temperature: %d C" % result.temperature)
+        print("Humidity: %d %%" % result.humidity)
+
+
 def my_listener(event):
     if event.exception:
         print('The job crashed :(')
     else:
         print('The job worked :)')
+
+def water_control(state):
+    print state
+    GPIO.setup(PIN2, GPIO.OUT)
+    if state == 1:
+        GPIO.setup(PIN2, GPIO.LOW)
+    else:
+        GPIO.setup(PIN2, GPIO.HIGH)
+
+def pump_on(state):
+    print state
+    GPIO.setup(PIN1, GPIO.OUT)
+    if state == 1:
+        GPIO.setup(PIN1, GPIO.LOW)
+    else:
+        GPIO.setup(PIN1, GPIO.HIGH)
+    
 
 def stop_hello(scheduler):
     print "job stopped"
@@ -61,19 +109,28 @@ def start_hello(scheduler):
 
 def onUpdate():
     stopJobs()
+    checkIfHome()
+    #readTemp()
     print "Schedule Starting up"
-    dbArr = service.getAllHeater()
-    for db in dbArr:
-        #print db['time_start']
-        #print db['time_end']
-        timeStart = db['time_start'].strip().split(':')
-        timeEnd = db['time_end'].strip().split(':')
-        day = db['day_no'] - 1
-        #print day
-        scheduler.add_job(start_hello, 'cron', day_of_week=day, hour=int(timeStart[0]), minute=int(timeStart[1]), args=[scheduler])
-        scheduler.add_job(stop_hello, 'cron', day_of_week=day, hour=int(timeEnd[0]), minute=int(timeEnd[1]), args=[scheduler])
-    scheduler.start()
-    scheduler.add_listener(my_listener, events.EVENT_JOB_ERROR | events.EVENT_JOB_ERROR)
+    contArr = service.getControl()
+    #pump_on(contArr[0]['pumpOn']))
+    #water_control(contArr[0]['waterOn'])
+    if contArr[0]['waterOn'] == 1:
+        print "Water On"
+        dbArr = service.getAllHeater()
+        for db in dbArr:
+            #print db['time_start']
+            #print db['time_end']
+            timeStart = db['time_start'].strip().split(':')
+            timeEnd = db['time_end'].strip().split(':')
+            day = db['day_no'] - 1
+            #print day
+            scheduler.add_job(start_hello, 'cron', day_of_week=day, hour=int(timeStart[0]), minute=int(timeStart[1]), args=[scheduler])
+            scheduler.add_job(stop_hello, 'cron', day_of_week=day, hour=int(timeEnd[0]), minute=int(timeEnd[1]), args=[scheduler])
+        scheduler.start()
+        scheduler.add_listener(my_listener, events.EVENT_JOB_ERROR | events.EVENT_JOB_ERROR)
+    else:
+        print "Water OFF"
     return "OK" 
     
 def stopJobs():
@@ -87,7 +144,7 @@ def getJobs():
     print scheduler.get_jobs()
     return "Ok"  
 
-@app.route("/send", methods=['POST', 'GET'])
+@app.route("/", methods=['POST', 'GET'])
 def onHeaterSend():
     content = request.get_json()
     data = json.loads(content)
@@ -106,14 +163,16 @@ def onHeaterSend():
     onUpdate()
     return jsonify({'status' : 'ok'}), 201 
 
-@app.route("/get/control",  methods=['POST', 'GET'])
+@app.route("//",  methods=['POST', 'GET'])
 def getControl():
-    return jsonify({'control' : service.getControl()}), 201    
+    return jsonify({'' : service.getControl()}), 201    
 
-@app.route("/send/control",  methods=['POST', 'GET'])
+@app.route("//",  methods=['POST', 'GET'])
 def sendControl():
     content = request.get_json()
     data = json.loads(content)
+    pump_on(int(data['pumpOn']))
+    water_control(int(data['waterOn']))
     service.updateControl(data["waterOn"], data["heatingOn"], data["pumpOn"] )
     if data['waterOn'] == '0':
         stopJobs()
@@ -121,14 +180,17 @@ def sendControl():
         onUpdate()
     return jsonify({'status' : 'ok'}), 201  
 
-@app.route("/get",  methods=['POST', 'GET'])
+@app.route("/",  methods=['POST', 'GET'])
 def getHeater():
-    return jsonify({'heater' : service.getAllHeater()}), 201
+    jsonData = {'heater':service.getAllHeater(), 'control':service.getControl()}
+    return jsonify(jsonData), 201
  
 def create_app(debug=True):
-    onUpdate() 
+    onUpdate()
     
 if __name__ == "__main__":
    create_app(True)
    app.run(host='', port=, debug=True)
+			
+
 			

@@ -112,7 +112,7 @@ class PageViewController: UIViewController, UIPageViewControllerDataSource {
         if itemController.itemIndex + 1 < contentImages.count {
             return getItemController(itemController.itemIndex+1)
         }
-        6
+        
         return nil
     }
     

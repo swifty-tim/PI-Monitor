@@ -47,7 +47,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.boostIndex = 0
         self.boostTenMins = 0
-        self.getControlValues()
         self.getHeaterValues()
         timerUsed = true
         
@@ -108,11 +107,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func getControlValues() {
+    func getHeaterValues() {
         
         let dic = [String: String]()
         let networkURL = NSBundle.mainBundle().objectForInfoDictionaryKey("Home URL") as! String
-        HTTPConnection.getPingResults(dic, url: networkURL+"control/get", httpMethod: "POST") { (succeeded: Bool, data: NSData) -> () in
+        HTTPConnection.getPingResults(dic, url: networkURL+"heater/get", httpMethod: "POST") { (succeeded: Bool, data: NSData) -> () in
             // Move to the UI thread
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 if (!succeeded) {
@@ -133,28 +132,7 @@ class ViewController: UIViewController {
                     } else {
                         self.timerUsed = true
                     }
-                }
-            })
-        }
-        
-    }
-    
-    func getHeaterValues() {
-        
-        let dic = [String: String]()
-        let networkURL = NSBundle.mainBundle().objectForInfoDictionaryKey("Home URL") as! String
-        HTTPConnection.getPingResults(dic, url: networkURL+"heater/get", httpMethod: "POST") { (succeeded: Bool, data: NSData) -> () in
-            // Move to the UI thread
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                if (!succeeded) {
-                    let alert = UIAlertController(title: "Oops!", message:"No data found", preferredStyle: .Alert)
-                    let action = UIAlertAction(title: "OK", style: .Default) { _ in
-                        //
-                    }
-                    alert.addAction(action)
-                    self.presentViewController(alert, animated: true){}
-                    
-                } else {
+
                     //print (NSString(data: data, encoding: NSUTF8StringEncoding) )
                     self.heaterSchedules = HTTPConnection.parseJSON(data)
                     let date = NSDate()
