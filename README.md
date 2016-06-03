@@ -42,3 +42,9 @@ iOS Network Ping Hop Location
 
 Pi Heating Setup
 ![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/IMG_2198.JPG)
+
+
+Pi Heating Complete 
+![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/Pi_Complete.jpg)
+
+
