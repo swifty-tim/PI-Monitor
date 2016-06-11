@@ -28,11 +28,23 @@ central heating or hot water.
 5.Mac OS Monitor. 
 A simple OSX app, to show me the status of the two raspberry's running. I read the current temperater, CPU usuage etc.
 
+29/05/2016 Update
+Create a bash script called checkFlask to run every 10mins to ensure the screen is running, is any breaks or changes then it will check the output of screen -ls and run the command if not running
+
 Networking Pi Setup 1
-![alt tag](https://github.com/collegboi/PI-Monitor/blob/master/pi1.jpg)
+![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/pi1.jpg)
 
 OSX Monitor App
-![alt tag](https://github.com/collegboi/PI-Monitor/blob/master/pi2.jpg)
+![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/pi2.jpg)
 
 iOS Network Ping Hop Location
-![alt tag](https://github.com/collegboi/PI-Monitor/blob/master/pi3.png)
+![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/pi3.png)
+
+Pi Heating Setup
+![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/IMG_2198.JPG)
+
+
+Pi Heating Complete 
+![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/Pi_Complete.jpg)
+
+
