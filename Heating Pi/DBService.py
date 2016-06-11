@@ -21,6 +21,9 @@ class Service(object):
 		
 	def getControl(self):
 		return self.dbao.selectControl()
+	
+	def deleteBoost(self):
+		return self.dbao.deleteBoost()
 		
 	def updateHeater(self, heater ):
 		if heater.getRecordEnabled() == -1:
@@ -38,7 +41,7 @@ class Service(object):
 		response = []
 		
 		for item in self.dbao.selectDB():
-			response.append({'id': item.getID(), 'day_no' : item.getDay(), 'heater_type' : item.getHeaterType(), 'water_used':item.getWaterUsed() , 'time_start':item.getTimeStart() , 'time_end':item.getTimeEnd(),
+			response.append({'id': item.getID(), 'day_no' : item.getDay(), 'heater_type' : item.getHeaterType(), 'water_used':item.getWaterUsed() ,  'heater_used': item.getHeatingUsed(),'time_start':item.getTimeStart() , 'time_end':item.getTimeEnd(),
 			 'boost_used':item.getBoostUsed(), 'record_enabled':item.getRecordEnabled() })
 						
 		return response

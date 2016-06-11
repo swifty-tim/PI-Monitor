@@ -44,7 +44,7 @@ class FilterContentView: UIView {
         
         let label1: UILabel = UILabel(frame: CGRect(x: 0, y: yValue!, width: self.frame.width * 0.8, height: 40))
         label1.center = CGPoint(x: xValue * 2, y: yValue!)
-        label1.text = "Hot Water"
+        label1.text = "Heating"
         label1.font = UIFont(name: "Avenir Next", size: 20)
         self.addSubview(label1)
         
@@ -60,7 +60,7 @@ class FilterContentView: UIView {
         
         let label2: UILabel = UILabel(frame: CGRect(x: 0, y: yValue!, width: self.frame.width * 0.8, height: 40))
         label2.center = CGPoint(x: xValue * 2, y: yValue!)
-        label2.text = "Heating"
+        label2.text = "Hot Water"
         label2.font = UIFont(name: "Avenir Next", size: 20)
         self.addSubview(label2)
         

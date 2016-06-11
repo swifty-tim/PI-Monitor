@@ -107,6 +107,19 @@ public class HTTPConnection {
             var friValues = [Heater]()
             var satValues = [Heater]()
             var sunValues = [Heater]()
+            var waterTemp : Double = 0.0
+            var roomTemp : Double = 0.0
+            
+            
+            if let temp = json["temp"] as? NSDictionary {
+                if let water_temp = temp["waterTemp"] as? Double {
+                    waterTemp = water_temp
+                }
+                if let room_temp = temp["roomTemp"] as? Double {
+                    roomTemp = room_temp
+                }
+            }
+
             
             // Okay, the parsedJSON is here, let's get the value for 'success' out of it
             if let feeds = json["heater"] as? NSArray {
@@ -142,6 +155,8 @@ public class HTTPConnection {
                     if let time_end = feed["time_end"] as? String {
                         newheater.setTimerEnd(time_end.toDateTime())
                     }
+                    newheater.setRoomTemp(roomTemp)
+                    newheater.setWaterTemp(waterTemp)
                     
                     switch newheater.getDayNo() {
                     case 1  :

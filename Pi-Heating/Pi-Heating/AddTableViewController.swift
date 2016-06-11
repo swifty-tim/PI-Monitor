@@ -63,7 +63,7 @@ class AddTableViewController: UITableViewController, UIPickerViewDelegate, UIPic
     }
     
     func addNewSchedule() {
-        
+        self.update = false
         let dic : [String : String] = [ "id": String(self.timerSchedule!.getID()),
                    "day_no": String(self.timerSchedule!.getDayNo()),
                    "record_enabled": String(self.timerSchedule!.getRecordEnabled()),
@@ -103,7 +103,10 @@ class AddTableViewController: UITableViewController, UIPickerViewDelegate, UIPic
             
             let subVC: DayViewController = segue.destinationViewController as! DayViewController
             subVC.update = self.update!
-            subVC.indexPath = self.editIndexPath!
+            self.tableView.reloadData()
+            if self.update! {
+                subVC.indexPath = self.editIndexPath!
+            }
         }
         
     }
@@ -246,11 +249,11 @@ extension AddTableViewController {
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if row == 1 {
-            self.timerSchedule?.setWaterUsed(0)
-            self.timerSchedule?.setHeatingUsed(1)
-        } else  {
             self.timerSchedule?.setWaterUsed(1)
             self.timerSchedule?.setHeatingUsed(0)
+        } else  {
+            self.timerSchedule?.setWaterUsed(0)
+            self.timerSchedule?.setHeatingUsed(1)
         }
         
         

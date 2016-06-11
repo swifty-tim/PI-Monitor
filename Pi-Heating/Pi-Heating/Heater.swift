@@ -31,6 +31,8 @@ class Heater {
     var test_date : NSDate?
     var time_start : NSDate?
     var time_end : NSDate?
+    var roomTemp : Double = 0.0
+    var waterTemp : Double = 0.0
     
     
     func setID(id: Int) {
@@ -103,6 +105,22 @@ class Heater {
     }
     func getTestDate() -> NSDate {
         return self.test_date!
+    }
+    
+    func setWaterTemp(waterTemp : Double) {
+        self.waterTemp = waterTemp
+    }
+    
+    func getWaterTemp() -> Double {
+        return self.waterTemp
+    }
+    
+    func setRoomTemp(roomTemp : Double) {
+        self.roomTemp = roomTemp
+    }
+    
+    func getRoomTemp() -> Double {
+        return self.roomTemp
     }
     
 }

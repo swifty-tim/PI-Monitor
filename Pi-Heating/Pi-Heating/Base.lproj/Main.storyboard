@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Gsp-aB-Etq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4sD-xi-E1B">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Pi Heater-->
+        <!--Pi Water-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pi_Heating" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Pi Heater" id="3oh-mG-EhI">
+                    <navigationItem key="navigationItem" title="Pi Water" id="3oh-mG-EhI">
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="1A1-Dg-yfS">
                             <connections>
                                 <action selector="refreshView:" destination="BYZ-38-t0r" id="an8-Ps-Ejw"/>
@@ -34,7 +34,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="689" y="373"/>
+            <point key="canvasLocation" x="2313" y="373"/>
+        </scene>
+        <!--Pi Heating-->
+        <scene sceneID="PSn-6F-loA">
+            <objects>
+                <viewController id="i2c-Yd-s0H" customClass="ViewController" customModule="Pi_Heating" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mLU-jN-jWo"/>
+                        <viewControllerLayoutGuide type="bottom" id="KWf-mO-QWW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yZi-mf-Gcx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pi Heating" id="PzF-oG-w7r">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="9ca-zb-8EJ">
+                            <connections>
+                                <action selector="refreshView2:" destination="i2c-Yd-s0H" id="Rdd-Ac-ymG"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="ic_settings" id="p1K-bD-Tl1">
+                            <connections>
+                                <segue destination="JbZ-OW-rsQ" kind="show" id="Ppw-Nw-pwb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ecu-d3-gzF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2334" y="1144"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="2qL-hM-3SL">
@@ -54,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ohr-NS-xLl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2180" y="424"/>
+            <point key="canvasLocation" x="3804" y="424"/>
         </scene>
         <!--Page Controller-->
         <scene sceneID="Slo-dV-9Bh">
@@ -64,7 +94,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VYY-LF-Rux" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2849" y="12"/>
+            <point key="canvasLocation" x="4473" y="12"/>
         </scene>
         <!--Day View Controller-->
         <scene sceneID="Y82-x4-OBc">
@@ -152,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SCZ-KD-ixt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3599" y="697"/>
+            <point key="canvasLocation" x="6035" y="697"/>
         </scene>
         <!--Add Table View Controller-->
         <scene sceneID="fhy-14-mkd">
@@ -296,25 +326,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCi-oM-KCn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="UDo-71-Muj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4305" y="697"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="4AR-P9-SX3">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gsp-aB-Etq" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="H9U-kx-bqM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Anm-ST-shK"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yWy-ca-sfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-10" y="189"/>
+            <point key="canvasLocation" x="6741" y="697"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tQ6-ZR-cVv">
@@ -332,7 +344,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ess-yq-jBx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1368" y="424"/>
+            <point key="canvasLocation" x="2992" y="424"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6sc-Qe-OoI">
@@ -351,10 +363,72 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ws-H7-kQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2849" y="697"/>
+            <point key="canvasLocation" x="5285" y="697"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="f0M-5F-KX4">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4sD-xi-E1B" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="5JO-pS-PAI"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="ZPN-59-I6a">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="SSj-I2-NDQ" kind="relationship" relationship="viewControllers" id="v23-4f-cdZ"/>
+                        <segue destination="MO2-nc-j8F" kind="relationship" relationship="viewControllers" id="hIh-Lh-pcV"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pl3-AV-rb2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="689" y="373"/>
+        </scene>
+        <!--Water-->
+        <scene sceneID="jvV-hj-VGe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SSj-I2-NDQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Water" image="water" selectedImage="water" id="DKF-an-Ipt"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zeo-1R-Sqd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QtL-YK-Csf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BOh-NQ-w98" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1501" y="373"/>
+        </scene>
+        <!--Heating-->
+        <scene sceneID="wp0-GP-8T3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MO2-nc-j8F" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Heating" image="heater" selectedImage="heater" id="reZ-Jc-OpG"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="g0V-fd-JR5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="i2c-Yd-s0H" kind="relationship" relationship="rootViewController" id="DBF-zY-TEg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j2a-Zj-LiT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1522" y="1144"/>
         </scene>
     </scenes>
     <resources>
+        <image name="heater" width="36" height="36"/>
         <image name="ic_settings" width="36" height="36"/>
+        <image name="water" width="36" height="36"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ppw-Nw-pwb"/>
+    </inferredMetricsTieBreakers>
 </document>

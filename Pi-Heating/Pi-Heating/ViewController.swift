@@ -29,8 +29,13 @@ class ViewController: UIViewController {
     var circleRadius : CGFloat = 150
     var boostTenMins : Int?
     var boostIndex : Int?
-    
+    var boostTimer : NSTimer?
+    var boostTotal : Int = 0
+    var boostCountTimer : NSTimer?
     var controlValues = [String:Int]()
+    var roomTemp : Double = 0.0
+    var waterTemp : Double = 0.0
+    var tabIndex : Int = 0
     
     //255, 0, 128
     let currTimeColor = UIColor(red: 255.0/255, green: 0.0/255, blue: 128.0/255, alpha: 0.8)
@@ -89,7 +94,7 @@ class ViewController: UIViewController {
         x = self.view.center.x
         y = self.view.center.y - self.view.center.y / 3.8
         // Do any additional setup after loading the view, typically from a nib.
-        _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(self.updateView), userInfo: nil, repeats: true)
+        _ = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(self.updateView), userInfo: nil, repeats: true)
        self.createCirlce()
        // self.drawSemicircle()
     }
@@ -101,10 +106,26 @@ class ViewController: UIViewController {
             print("Portrait")
         }
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.tabIndex = self.tabBarController!.selectedIndex
+        print(self.tabIndex)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func startTimer(){
+        self.boostTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(self.sendBoostTimes), userInfo: nil, repeats: false)
+        if self.boostCountTimer == nil {
+            self.boostCountTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: #selector(self.updateBoostCount), userInfo: nil, repeats: true)
+        }
+    }
+    func stopTimer() {
+        self.boostTimer?.invalidate()
+        self.boostTimer = nil
     }
     
     func getHeaterValues() {
@@ -137,9 +158,58 @@ class ViewController: UIViewController {
                     self.heaterSchedules = HTTPConnection.parseJSON(data)
                     let date = NSDate()
                     self.todaySchedules = self.heaterSchedules[date.weekday() - 1 ].getDatTimer()
+                    self.updateView()
                 }
             })
         }
+        
+    }
+    
+    func updateBoostCount() {
+        self.boostTotal = self.boostTotal - 20
+        self.simulateBoostDown()
+        
+        if self.boostTotal <= 0 {
+            self.boostCountTimer?.invalidate()
+            self.boostCountTimer = nil
+        }
+        
+    }
+    
+    func sendBoostTimes() {
+        
+        print("sending data")
+        print(self.boostTotal)
+        
+        /*let dic : [String : String] = [
+                "boost_end": String(self.boostTotal)
+        ]
+        
+        let networkURL = NSBundle.mainBundle().objectForInfoDictionaryKey("Home URL") as! String
+        HTTPConnection.getPingResults(dic, url: networkURL+"boost/send", httpMethod: "POST") { (succeeded: Bool, data: NSData) -> () in
+            // Move to the UI thread
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                if (!succeeded) {
+                    let alert = UIAlertController(title: "Oops!", message:"Error in setting boost", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "OK", style: .Default) { _ in
+                        //
+                    }
+                    alert.addAction(action)
+                    self.presentViewController(alert, animated: true){}
+                    
+                } else {
+                    print("succeded")
+                    let boost = (self.boostTotal < 0) ? 0 : self.boostTotal ;
+                    let alert = UIAlertController(title: "Boost!", message:"Boost set for " + String(boost) + " min/s", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "OK", style: .Default) { _ in
+                        //
+                    }
+                    alert.addAction(action)
+                    self.presentViewController(alert, animated: true){}
+                }
+            })
+        }*/
+
         
     }
 
@@ -149,7 +219,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func refreshView(sender: AnyObject) {
-        self.updateView()
+        self.getHeaterValues()
+    }
+    @IBAction func refreshView2(sender: AnyObject) {
+        self.getHeaterValues()
     }
     
     func swipUpGesture() {
@@ -157,15 +230,47 @@ class ViewController: UIViewController {
         self.addFilterView()
     }
     
-    //func swipDownGesture() {
-    //    self.addOrRemoveBlurrToView()
-    //    self.dismissFilterView()
-   // }
     
+    func simulateBoostDown() {
+    
+        self.boostTotal = self.boostTotal - 20
+        self.boostTenMins! = self.boostTenMins! - 1
+        
+        let boostMulti = self.boostTenMins! * 10
+        let date1 = NSDate()
+        self.todaySchedules[self.boostIndex!].setTimerEnd(date1.addMinutes(boostMulti))
+        self.updateView()
+        let timeStart = self.todaySchedules[self.boostIndex!].getTimerStart()
+        let timeEnd = self.todaySchedules[self.boostIndex!].getTimerEnd()
+        
+        if timeEnd.isLessThanDate( timeStart ) {
+            
+            self.boostTime = false
+            self.heaterOn = false
+            
+            self.todaySchedules.removeAtIndex(self.boostIndex!)
+            
+            UIView.animateWithDuration(1.0, animations:{
+                self.boostUp.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - self.boostUp.frame.size.height - 30 )
+                self.boostDown.center = CGPointMake(  self.view.frame.size.width / 2, self.view.frame.size.height + self.boostDown.frame.size.height + 20 )
+            })
+            
+        }
+
+        
+    }
     
     func boostUpButton(sender: UIButton) {
         
+        self.boostUp.enabled = false
+        
         self.boostTenMins! = self.boostTenMins! + 1
+        self.boostTotal = self.boostTotal + 20
+        
+        if self.boostTimer != nil {
+            self.stopTimer()
+        }
+        self.startTimer()
         
         if !boostTime {
             
@@ -176,9 +281,10 @@ class ViewController: UIViewController {
             newHeater.setTimerStart(date1)
             newHeater.setTimerEnd(date1.addMinutes(boostMulti))
             newHeater.setBoostUsed(1)
-            newHeater.setWaterUsed(1)
-            newHeater.setHeaterType("Boost Hot Water")
-            newHeater.setHeatingUsed(0)
+            newHeater.setWaterUsed((self.currIndex == 0) ? 1 : 0)
+            newHeater.setHeaterType("Boost Water")
+            newHeater.setHeatingUsed(self.tabIndex)
+            newHeater.setWaterTemp(self.waterTemp)
             newHeater.setID(self.todaySchedules.count)
             self.boostIndex = self.todaySchedules.count
             self.todaySchedules.append(newHeater)
@@ -186,56 +292,42 @@ class ViewController: UIViewController {
             self.boostTime = true
             self.heaterOn = true
             UIView.animateWithDuration(1.0, animations:{
-                self.boostUp.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - self.boostDown.frame.size.height - self.boostUp.frame.size.height - 20 )
-                self.boostDown.center = CGPointMake(  self.view.frame.size.width / 2, self.view.frame.size.height - self.boostDown.frame.size.height - 10 )
+                self.boostUp.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - self.boostDown.frame.size.height - self.boostUp.frame.size.height - 30 )
+                self.boostDown.center = CGPointMake(  self.view.frame.size.width / 2, self.view.frame.size.height - self.boostDown.frame.size.height - 20 )
             })
             self.updateView()
             /*let date = NSDate()
-            let hour = date.hour()
-            let min = date.minute()
-            let interval = Int(min / 20)
-            let currIndex = ( hour * 3 - 1 ) + interval
-            
-            self.segments[self.checkCurrentIndex(currIndex)].getShape().strokeColor = UIColor.orangeColor().CGColor */
+             let hour = date.hour()
+             let min = date.minute()
+             let interval = Int(min / 20)
+             let currIndex = ( hour * 3 - 1 ) + interval
+             
+             self.segments[self.checkCurrentIndex(currIndex)].getShape().strokeColor = UIColor.orangeColor().CGColor */
             //self.segments[self.checkCurrentIndex(currIndex)].setBoost(1)
             //newHeater.setID(self.currIndex)
             
         } else {
-    
+            
             let boostMulti = self.boostTenMins! * 10
             let date1 = NSDate()
             self.todaySchedules[self.boostIndex!].setTimerEnd(date1.addMinutes(boostMulti))
             self.updateView()
             
         }
+        
+        self.boostUp.enabled = true
     }
     
     func boostDownButton(sender: UIButton) {
         
         if self.boostTime {
             
-            self.boostTenMins! = self.boostTenMins! - 1
-    
-            let boostMulti = self.boostTenMins! * 10
-            let date1 = NSDate()
-            self.todaySchedules[self.boostIndex!].setTimerEnd(date1.addMinutes(boostMulti))
-            self.updateView()
-            let timeStart = self.todaySchedules[self.boostIndex!].getTimerStart()
-            let timeEnd = self.todaySchedules[self.boostIndex!].getTimerEnd()
-            
-            if timeEnd.isLessThanDate( timeStart ) {
-                
-                self.boostTime = false
-                self.heaterOn = false
-                
-                self.todaySchedules.removeAtIndex(self.boostIndex!)
-                
-                UIView.animateWithDuration(1.0, animations:{
-                    self.boostUp.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - self.boostUp.frame.size.height - 20 )
-                    self.boostDown.center = CGPointMake(  self.view.frame.size.width / 2, self.view.frame.size.height + self.boostDown.frame.size.height + 10 )
-                })
-                
+            if self.boostTimer!.valid {
+                self.stopTimer()
             }
+            self.startTimer()
+            
+            self.simulateBoostDown()
         }
     }
     
@@ -270,7 +362,7 @@ class ViewController: UIViewController {
         
         indexNow  = self.testValue(indexNow)
         
-        for i in self.segments {
+        for ( _, i ) in self.segments.enumerate() {
             
             if !self.timerUsed! {
                i.getShape().strokeColor = UIColor.lightGrayColor().CGColor
@@ -299,32 +391,42 @@ class ViewController: UIViewController {
         
             for schedule in self.todaySchedules {
                 
-                let hourStart = schedule.getTimerStart().hour()
-                let minStart = schedule.getTimerStart().minute() / 20
+                self.waterTemp = schedule.getWaterTemp()
+                self.roomTemp = schedule.getRoomTemp()
+                
+                if schedule.getHeatingUsed() == self.tabIndex {
+                
+                
+                    let hourStart = schedule.getTimerStart().hour()
+                    let minStart = schedule.getTimerStart().minute() / 20
             
-                let intervalStart = self.flourValue(minStart)
-                var startIndex = ( hourStart * 3 ) + intervalStart
-                startIndex = self.testValue(startIndex)
+                    let intervalStart = self.flourValue(minStart)
+                    var startIndex = ( hourStart * 3 ) + intervalStart
+                    startIndex = self.testValue(startIndex)
             
             
-                let hourEnd = schedule.getTimerEnd().hour()
-                let minEnd = schedule.getTimerEnd().minute() / 20
+                    let hourEnd = schedule.getTimerEnd().hour()
+                    let minEnd = schedule.getTimerEnd().minute() / 20
         
-                let intervalEnd = self.flourValue(minEnd)
-                var endIndex = ( hourEnd * 3 ) + intervalEnd
-                endIndex = self.testValue(endIndex)
+                    let intervalEnd = self.flourValue(minEnd)
+                    var endIndex = ( hourEnd * 3 ) + intervalEnd
+                    endIndex = self.testValue(endIndex)
             
-                var timeIndex = 0
-                timeIndex = timeIndex + startIndex
-                while endIndex >= timeIndex {
+                    var timeIndex = 0
+                    timeIndex = timeIndex + startIndex
+                    while endIndex >= timeIndex {
                     
-                    if schedule.getBoostUsed() == 1 {
-                        self.segments[timeIndex].getShape().strokeColor = UIColor.orangeColor().CGColor
-                    } else {
-                        self.segments[timeIndex].getShape().strokeColor = UIColor.greenColor().CGColor
+                        if schedule.getBoostUsed() == 1 {
+                        
+                            self.segments[timeIndex].getShape().strokeColor = UIColor.orangeColor().CGColor
+                        } else if CGColorEqualToColor( self.segments[indexNow].getShape().strokeColor!, UIColor.yellowColor().CGColor) {
+                            self.segments[timeIndex].getShape().strokeColor = UIColor.orangeColor().CGColor
+                        }else {
+                            self.segments[timeIndex].getShape().strokeColor = UIColor.greenColor().CGColor
+                        }
+                    
+                        timeIndex = timeIndex + 1
                     }
-                    timeIndex = timeIndex + 1
-            
                 }
             }
         }
@@ -333,12 +435,18 @@ class ViewController: UIViewController {
             
             self.tempLabel.backgroundColor = UIColor.redColor()
             self.tempLabel.textColor = UIColor.whiteColor()
-            
         } else {
             
             self.tempLabel.backgroundColor = UIColor.whiteColor()
             self.tempLabel.textColor = UIColor.redColor()
         }
+        
+        if self.tabIndex == 0 {
+         self.tempLabel.text = String(format: "%.1f ℃", self.waterTemp )
+        } else {
+            self.tempLabel.text = String(format: "%.1f ℃", self.roomTemp )
+        }
+
 
     }
     
@@ -378,7 +486,7 @@ class ViewController: UIViewController {
             
             if i % 3 == 0 {
                 
-                let label = UILabel(frame: CGRectMake(0, 0, 22, 22))
+                let label = UILabel(frame: CGRectMake(0, 0, 24, 24))
                 label.center = CGPointMake(circlePoints[index].x, circlePoints[index].y)
                 label.textColor = UIColor.redColor()
                 label.textAlignment = NSTextAlignment.Center
@@ -395,7 +503,7 @@ class ViewController: UIViewController {
         self.tempLabel.textColor = UIColor.purpleColor()
         self.tempLabel.adjustsFontSizeToFitWidth = true
         self.tempLabel.textAlignment = NSTextAlignment.Center
-        self.tempLabel.text = "20℃"
+        self.tempLabel.text = "...."
         self.tempLabel.font = UIFont(name: "Avenir Next", size: 32)
         self.tempLabel.layer.cornerRadius = self.tempLabel.frame.size.width / 2
         self.tempLabel.clipsToBounds = true
