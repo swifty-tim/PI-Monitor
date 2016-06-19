@@ -21,7 +21,7 @@
                     <navigationItem key="navigationItem" title="Pi Water" id="3oh-mG-EhI">
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="1A1-Dg-yfS">
                             <connections>
-                                <action selector="refreshView:" destination="BYZ-38-t0r" id="an8-Ps-Ejw"/>
+                                <action selector="refreshView1:" destination="BYZ-38-t0r" id="Pv0-7I-lyK"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ic_settings" id="r1v-FU-Knx">
@@ -52,7 +52,7 @@
                     <navigationItem key="navigationItem" title="Pi Heating" id="PzF-oG-w7r">
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="9ca-zb-8EJ">
                             <connections>
-                                <action selector="refreshView2:" destination="i2c-Yd-s0H" id="Rdd-Ac-ymG"/>
+                                <action selector="resfreshHeating:" destination="i2c-Yd-s0H" id="uKV-JU-iXb"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ic_settings" id="p1K-bD-Tl1">

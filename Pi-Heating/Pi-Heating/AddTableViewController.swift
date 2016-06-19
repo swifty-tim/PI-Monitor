@@ -63,7 +63,6 @@ class AddTableViewController: UITableViewController, UIPickerViewDelegate, UIPic
     }
     
     func addNewSchedule() {
-        self.update = false
         let dic : [String : String] = [ "id": String(self.timerSchedule!.getID()),
                    "day_no": String(self.timerSchedule!.getDayNo()),
                    "record_enabled": String(self.timerSchedule!.getRecordEnabled()),

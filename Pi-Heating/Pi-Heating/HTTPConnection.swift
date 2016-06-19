@@ -137,7 +137,7 @@ public class HTTPConnection {
                     if let heater_type = feed["heater_type"] as? String {
                         newheater.setHeaterType(heater_type)
                     }
-                    if let heating_used = feed["heating_used"] as? Int {
+                    if let heating_used = feed["heater_used"] as? Int {
                         newheater.setHeatingUsed(heating_used)
                     }
                     if let record_enabled = feed["record_enabled"] as? Int {

@@ -33,10 +33,10 @@ os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
 base_dir = '/sys/bus/w1/devices/'
 
-device_folder1 = glob.glob(base_dir + '28*')[0]
+device_folder1 = glob.glob(base_dir + '')[0]
 device_file1 = device_folder1 + '/w1_slave'
 
-device_folder2 = glob.glob(base_dir + '28*')[0]
+device_folder2 = glob.glob(base_dir + '')[0]
 device_file2 = device_folder2 + '/w1_slave'
 
 service = Service()
@@ -46,9 +46,10 @@ scheduler = BackgroundScheduler()
 logging.basicConfig()
 
 PIN1 = 18 #pump
-PIN2 = 23 #water
-PIN3 = 24 #temp
+PIN2 = 23 #boost
+PIN3 = 24 #water
 PIN4 = 25 #door sensor
+#GPIO 4 = tempSensor
 
 welcomeHomeBash = './chat.sh'
 
@@ -99,7 +100,7 @@ def read_all_temp():
 	waterTemp = read_temp(waterLines)
 	roomTemp = read_temp(roomLines)
 	
-	return {  'waterTemp' : waterTemp, 'roomTemp' : roomTemp }
+	return { 'waterTemp' : waterTemp, 'roomTemp' : roomTemp }
 	
 
 
@@ -109,13 +110,22 @@ def my_listener(event):
 	else:
 		print('The job worked :)')
 
-def water_control(state):
-	print 'water'
+
+def boost_control(state):
+	print 'boost'
 	GPIO.setup(PIN2, GPIO.OUT)
 	if state == 1:
 		GPIO.setup(PIN2, GPIO.LOW)
 	else:
 		GPIO.setup(PIN2, GPIO.HIGH)
+
+def water_control(state):
+	print 'water'
+	GPIO.setup(PIN3, GPIO.OUT)
+	if state == 1:
+		GPIO.setup(PIN3, GPIO.LOW)
+	else:
+		GPIO.setup(PIN3, GPIO.HIGH)
 
 def pump_on(state):
 	print state
@@ -126,11 +136,16 @@ def pump_on(state):
 		GPIO.setup(PIN1, GPIO.HIGH)
 	
 
+def stop_boost(scheduler):
+	print "boost stopped"
+	appPush.notify(event_name='Test', trackers={ 'event': 'bosot off'})
+	boost_control(0)
+	service.deleteBoost()
+
 def stop_hello(scheduler):
 	print "job stopped"
 	appPush.notify(event_name='Test', trackers={ 'event': 'off'})
 	water_control(0)
-	service.deleteBoost()
 
 def start_hello(scheduler):
 	print "job completed"
@@ -148,7 +163,10 @@ def onUpdate():
 		print "Water On"
 		dbArr = service.getAllHeater()
 		for db in dbArr:
-			if db['boost_used'] == 0:
+			recordEnabled = db['record_enabled']
+			boostUsed = db['boost_used']
+			if recordEnabled == 1 and boostUsed == 0:
+				print('adding new job')
 				timeStart = db['time_start'].strip().split(':')
 				timeEnd = db['time_end'].strip().split(':')
 				day = db['day_no'] - 1
@@ -178,20 +196,20 @@ def boost():
 	
 	if int(boostEnd) > 0:
 		now = datetime.now()
-		water_control(1)
+		boost_control(1)
 		timeFrac = int(boostEnd) / 60
 		hourFrac, minFrac = divmod(timeFrac, 1)
 		min = int(minFrac * 60) + now.minute
 		hour = int(hourFrac) + now.hour
 		print hour, min
-		scheduler.add_job(stop_hello, 'cron', id = 'boost_id', hour=hour, minute=min, args=[scheduler])
+		scheduler.add_job(stop_boost, 'cron', id = 'boost_id', hour=hour, minute=min, args=[scheduler])
 		
 		heater = Heater( -1, now.weekday(), 1, 1, 0, 1, 'Boost',
 			( str(now.hour)+':'+str(now.minute) ),
 			( str(hour)+':'+str(min) ) )
 		service.updateHeater(heater)
 	else:
-		water_control(0)
+		boost_control(0)
 	return "OK"
 	
 
@@ -218,14 +236,13 @@ def getLogs(filename):
 
 @app.route("/get/jobs",  methods=['GET'])
 def getJobs():
-	print scheduler.get_jobs()
-	return "Ok"  
+	print(scheduler.get_jobs())
+	return "OK"
 
 @app.route("/send", methods=['POST', 'GET'])
 def onHeaterSend():
 	content = request.get_json()
 	data = json.loads(content)
-	print data
 	# id, day_no, record_enabled, boost_used, heating_used, water_used, heater_type, time_start, time_end):
 	heater = Heater(
 		int(data['id']),
@@ -256,6 +273,7 @@ def sendControl():
 	if data['waterOn'] == '0':
 		stopJobs()
 		water_control(0)
+		boost_control(0)
 	else:
 		onUpdate()
 	return jsonify({'status' : 'ok'}), 201  
@@ -272,7 +290,7 @@ def create_app(debug=True):
 	
 if __name__ == "__main__":
    create_app(True)
-   app.run(host=, port=, debug=True)
+   app.run(host='', port=, debug=True)
 			
 
 			

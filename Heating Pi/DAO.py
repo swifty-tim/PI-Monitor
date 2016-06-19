@@ -152,11 +152,12 @@ class DBAO(object):
 	def deleteDB(self, heater):
 		self.connectDB()
 		print("DB Deleteing...")
+		print(heater.getID())
 		try:
 			cur = self.conn.cursor()
 			cur.execute(
 				"DELETE FROM PI_HEATER WHERE id =?",
-				(heater.getID()))
+				(heater.getID(),))
 			self.conn.commit()
 			self.closeDB()
 			return "Succesfully Deleted"

@@ -181,7 +181,7 @@ class ViewController: UIViewController {
         print("sending data")
         print(self.boostTotal)
         
-        /*let dic : [String : String] = [
+        let dic : [String : String] = [
                 "boost_end": String(self.boostTotal)
         ]
         
@@ -208,23 +208,27 @@ class ViewController: UIViewController {
                     self.presentViewController(alert, animated: true){}
                 }
             })
-        }*/
+        }
 
         
     }
 
     
+    @IBAction func refreshView1(sender: AnyObject) {
+        self.tempLabel.text = "...."
+        self.getHeaterValues()
+    }
+    @IBAction func resfreshHeating(sender: AnyObject) {
+        self.tempLabel.text = "...."
+        self.getHeaterValues()
+    }
+   
+    
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
     }
     
-    @IBAction func refreshView(sender: AnyObject) {
-        self.getHeaterValues()
-    }
-    @IBAction func refreshView2(sender: AnyObject) {
-        self.getHeaterValues()
-    }
-    
+        
     func swipUpGesture() {
         self.addOrRemoveBlurrToView()
         self.addFilterView()
@@ -378,15 +382,6 @@ class ViewController: UIViewController {
         self.segments[indexNow].getShape().strokeColor = UIColor.yellowColor().CGColor
         
         
-        /*if indexNow >= self.startIndex && indexNow <= self.currIndex ||
-        CGColorEqualToColor( self.segments[indexNow].getShape().strokeColor!, UIColor.greenColor().CGColor) ||
-        CGColorEqualToColor( self.segments[indexNow].getShape().strokeColor!, UIColor.orangeColor().CGColor) {
-            
-            self.segments[indexNow].getShape().strokeColor = UIColor.orangeColor().CGColor
-        } else {
-            self.segments[indexNow].getShape().strokeColor = UIColor.yellowColor().CGColor
-        } */
-        
         if self.heaterSchedules.count > 0 && self.timerUsed! {
         
             for schedule in self.todaySchedules {
@@ -394,7 +389,7 @@ class ViewController: UIViewController {
                 self.waterTemp = schedule.getWaterTemp()
                 self.roomTemp = schedule.getRoomTemp()
                 
-                if schedule.getHeatingUsed() == self.tabIndex {
+                if schedule.getHeatingUsed() == self.tabIndex && schedule.getRecordEnabled() == 1 {
                 
                 
                     let hourStart = schedule.getTimerStart().hour()
@@ -414,14 +409,19 @@ class ViewController: UIViewController {
             
                     var timeIndex = 0
                     timeIndex = timeIndex + startIndex
+                    
                     while endIndex >= timeIndex {
                     
                         if schedule.getBoostUsed() == 1 {
-                        
+                            
                             self.segments[timeIndex].getShape().strokeColor = UIColor.orangeColor().CGColor
-                        } else if CGColorEqualToColor( self.segments[indexNow].getShape().strokeColor!, UIColor.yellowColor().CGColor) {
+                            
+                        } else if CGColorEqualToColor( self.segments[timeIndex].getShape().strokeColor, UIColor.yellowColor().CGColor ) {
+                            
                             self.segments[timeIndex].getShape().strokeColor = UIColor.orangeColor().CGColor
+                            
                         }else {
+                            
                             self.segments[timeIndex].getShape().strokeColor = UIColor.greenColor().CGColor
                         }
                     

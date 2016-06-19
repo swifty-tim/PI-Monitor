@@ -67,6 +67,10 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             if indexPath != nil {
                 subVC.timerSchedule = self.todaySchedules[self.indexPath!.row]
                 subVC.editIndexPath = self.indexPath!
+                subVC.update = true
+            }
+            else {
+                subVC.update = false
             }
         }
     }
@@ -253,23 +257,6 @@ extension DayViewController {
     
     func addFilterView() {
         self.performSegueWithIdentifier("addSegue", sender: nil)
-//        self.addOrRemoveBlurrToView()
-//        
-//        self.filterView = ScheduleView()
-//        self.filterView!.frame = CGRect(x: 5, y: self.view.frame.height, width: self.view.frame.width - 10 , height: self.view.frame.height * 0.6)
-//        self.navigationController!.view.addSubview(self.filterView!)
-//        
-//        UIView.animateWithDuration(0.8, animations: { () -> Void in
-//            
-//            self.filterView!.frame = CGRect(x: 5, y: self.view.frame.height * 0.4, width: self.view.frame.width - 10, height: self.view.frame.height * 0.6)
-//            self.view.bringSubviewToFront(self.filterView!)
-//        })
-//        
-//        
-//        let swipDownGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipFilterView))
-//        swipDownGesture.direction = .Down
-//        self.filterView!.addGestureRecognizer(swipDownGesture)
-        
     }
     
     func addOrRemoveBlurrToView() {
