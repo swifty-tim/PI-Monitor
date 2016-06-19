@@ -31,6 +31,10 @@ A simple OSX app, to show me the status of the two raspberry's running. I read t
 29/05/2016 Update
 Create a bash script called checkFlask to run every 10mins to ensure the screen is running, is any breaks or changes then it will check the output of screen -ls and run the command if not running
 
+19/06/2016 Update
+Updated iOS App to contain two tab views, 1 central heating, 2 water heating and added temperature readings.
+Added two temperature water proof sensors ( DS18B20 ), added camera module v2 to take pictures when unknown person walks through the door, simply by checking if it's my phone bluetooth coming in 
+
 Networking Pi Setup 1
 ![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/pi1.jpg)
 
@@ -47,4 +51,9 @@ Pi Heating Setup
 Pi Heating Complete 
 ![alt tag](https://raw.githubusercontent.com/collegboi/PI-Monitor/master/Project%20Images/Pi_Complete.jpg)
 
+Pi Heating in use 
+![alt tag](https://github.com/collegboi/PI-Monitor/blob/master/Project%20Images/heating2.jpg)
+
+Pi Heating App View
+![alt tag](https://github.com/collegboi/PI-Monitor/blob/master/Project%20Images/app1.jpg)
 
